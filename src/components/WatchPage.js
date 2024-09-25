@@ -7,7 +7,6 @@ const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
-  console.log("video id ", videoId);
   useEffect(() => {
     dispatch(closeMenu());
   }, []);

@@ -9,7 +9,6 @@ const VideoContainer = () => {
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_API_URL);
     const json = await data.json();
-    console.log("josn ", json);
     setVideos(json.items);
   };
 
@@ -17,7 +16,6 @@ const VideoContainer = () => {
     getVideos();
   }, []);
 
-  console.log("videos ", videos[0]);
   return (
     <div className="flex flex-wrap">
       {videos?.map((each) => (

@@ -2,6 +2,7 @@
   "name": "my-youtube",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@reduxjs/toolkit": "^2.2.7",

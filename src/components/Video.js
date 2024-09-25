@@ -1,7 +1,6 @@
 import React from "react";
 
 const Video = ({ info }) => {
-    console.log('info ',info)
   const { statistics, snippet } = info;
   const { thumbnails, publishedAt,channelTitle,title } = snippet;
   return (

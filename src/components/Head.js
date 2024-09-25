@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOUTUBE_SUGGESTION_URL } from "../utils/constants";
 
 const Head = () => {
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState("");
+
+  const getSuggestions = async () => {
+    console.log('search q ',searchQuery)
+    // const data = await fetch(YOUTUBE_SUGGESTION_URL + searchQuery);
+    const data = await fetch("https://cors-anywhere.herokuapp.com/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=sadhguru", {
+      
+      method: "GET",
+      headers: {
+           "Content-Type": "application/json"
+      },
+  });
+
+  // console.log(response.json())
+  console.log('data is ',data)
+    const json = await data.json();
+    console.log("json suggestions val ", json);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSuggestions(), 200);
+    return () => {
+      clearTimeout(timer);
+    };
+  },[searchQuery]);
+
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
       <div className="flex col-span-1 mx-2">
@@ -25,8 +54,10 @@ const Head = () => {
        
       <div className="col-span-10">
         <input
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="w-3/4 border border-gray-400 rounded-l-full p-2"
           type="text"
+          value={searchQuery}
         />
         <button className="border border-gray-400 rounded-r-full py-2 bg-gray-200 px-4">
           🔍
